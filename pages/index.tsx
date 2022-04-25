@@ -1,86 +1,245 @@
-import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
+import Header from '../components/Header'
+import Hero from '../components/Hero'
+import { GetStaticProps } from 'next'
+import { urlFor } from '../sanity'
+import { Post } from '../typings'
+import Link from 'next/link'
+import Footer from '../components/Footer'
 
-const Home: NextPage = () => {
+import { getPaginatedPost } from '../lib/api'
+
+interface Props {
+  posts: [Post]
+  grammarPosts: [Post]
+  idiomsPosts: [Post]
+  vocabularyPosts: [Post]
+  othersPosts: [Post]
+}
+
+const Home = ({
+  posts,
+  grammarPosts,
+  idiomsPosts,
+  vocabularyPosts,
+  othersPosts,
+}: Props) => {
+  console.log(posts)
+  console.log('grammar', grammarPosts)
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+    <div className="">
       <Head>
-        <title>Create Next App</title>
+        <title>ELB</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="rounded-md bg-gray-100 p-3 font-mono text-lg">
-            pages/index.tsx
-          </code>
-        </p>
-
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+      <Header />
+      <Hero />
+      <div className="mx-auto mt-10 max-w-7xl">
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-bold">Most Recent Posts</h2>
+          <Link href="/posts">
+            <p className="cursor-pointer">View More</p>
+          </Link>
         </div>
-      </main>
+        <hr className="my-5 mx-auto w-full border border-gray-300" />
 
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center gap-2"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </a>
-      </footer>
+        <div className="grid grid-cols-1 gap-3 p-2 sm:grid-cols-3 ">
+          <Link key={posts[0]._id} href={`/post/${posts[0].slug.current}`}>
+            <div className="group col-span-2 cursor-pointer overflow-hidden">
+              <img
+                className="h-80 w-full rounded object-cover transition-transform duration-200 ease-in-out group-hover:scale-105"
+                src={urlFor(posts[0].mainImage).url()!}
+              />
+              <div className="flex justify-between bg-white py-3">
+                <div>
+                  <p className="text-sm">{posts[0].category.title}</p>
+                  <p className="text-lg font-bold">{posts[0].title}</p>
+                  <p className="text-xs">{posts[0].description}</p>
+                </div>
+              </div>
+            </div>
+          </Link>
+
+          <div className="col-span-1 flex flex-col">
+            {posts.map((post, index) => {
+              if (index >= 1) {
+                return (
+                  <Link key={post._id} href={`/post/${post.slug.current}`}>
+                    <div className="group  cursor-pointer overflow-hidden">
+                      <img
+                        className="h-40 w-full rounded object-cover transition-transform duration-200 ease-in-out group-hover:scale-105"
+                        src={urlFor(post.mainImage).url()!}
+                      />
+                      <div className="flex justify-between bg-white py-3">
+                        <div>
+                          <p className="text-sm">{post.category.title}</p>
+                          <p className="text-lg font-bold">{post.title}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                )
+              }
+            })}
+          </div>
+        </div>
+      </div>
+      <div className="mx-auto mt-10 max-w-7xl">
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-bold">Vocabulary</h2>
+          <Link href="/posts/vocabulary">
+            <p className="cursor-pointer">View More</p>
+          </Link>
+        </div>
+        <hr className="my-5 mx-auto w-full border border-gray-300" />
+        <div className="grid grid-cols-1 gap-3 p-2 sm:grid-cols-2 md:gap-6 md:p-6 lg:grid-cols-3">
+          {vocabularyPosts?.map((post) => (
+            <Link key={post._id} href={`/post/${post.slug.current}`}>
+              <div className="group cursor-pointer overflow-hidden ">
+                <img
+                  className="h-60 w-full rounded object-cover transition-transform duration-200 ease-in-out group-hover:scale-105"
+                  src={urlFor(post.mainImage).url()!}
+                />
+                <div className="flex justify-between bg-white py-3">
+                  <div>
+                    <p className="text-sm">{post.category.title}</p>
+                    <p className="text-lg font-bold">{post.title}</p>
+                    <p className="text-xs">{post.description}</p>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+      <div className="mx-auto mt-10 max-w-7xl">
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-bold">Grammar</h2>
+          <Link href="/posts/grammar">
+            <p className="cursor-pointer">View More</p>
+          </Link>
+        </div>
+        <hr className="my-5 mx-auto w-full border border-gray-300" />
+        <div className="grid grid-cols-1 gap-3 p-2 sm:grid-cols-2 md:gap-6 md:p-6 lg:grid-cols-3">
+          {grammarPosts?.map((post) => (
+            <Link key={post._id} href={`/post/${post.slug.current}`}>
+              <div className="group cursor-pointer overflow-hidden ">
+                <img
+                  className="h-60 w-full rounded object-cover transition-transform duration-200 ease-in-out group-hover:scale-105"
+                  src={urlFor(post.mainImage).url()!}
+                />
+                <div className="flex justify-between bg-white py-3">
+                  <div>
+                    <p className="text-sm">{post.category.title}</p>
+                    <p className="text-lg font-bold">{post.title}</p>
+                    <p className="text-xs">{post.description}</p>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+      <div className="mx-auto mt-10 max-w-7xl">
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-bold">Idioms&Phrases</h2>
+          <Link href="posts/idiomsphrases">
+            <p className="cursor-pointer">View More</p>
+          </Link>
+        </div>
+        <hr className="my-5 mx-auto w-full border border-gray-300" />
+        <div className="grid grid-cols-1 gap-3 p-2 sm:grid-cols-2 md:gap-6 md:p-6 lg:grid-cols-3">
+          {idiomsPosts?.map((post) => (
+            <Link key={post._id} href={`/post/${post.slug.current}`}>
+              <div className="group cursor-pointer overflow-hidden ">
+                <img
+                  className="h-60 w-full rounded object-cover transition-transform duration-200 ease-in-out group-hover:scale-105"
+                  src={urlFor(post.mainImage).url()!}
+                />
+                <div className="flex justify-between bg-white py-3">
+                  <div>
+                    <p className="text-sm">{post.category.title}</p>
+                    <p className="text-lg font-bold">{post.title}</p>
+                    <p className="text-xs">{post.description}</p>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+      <div className="mx-auto mt-10 max-w-7xl">
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-bold">Others</h2>
+          <Link href="/posts/others">
+            <p className="cursor-pointer">View More</p>
+          </Link>
+        </div>
+        <hr className="my-5 mx-auto w-full border border-gray-300" />
+        <div className="grid grid-cols-1 gap-3 p-2 sm:grid-cols-2 md:gap-6 md:p-6 lg:grid-cols-3">
+          {othersPosts?.map((post) => (
+            <Link key={post._id} href={`/post/${post.slug.current}`}>
+              <div className="group cursor-pointer overflow-hidden ">
+                <img
+                  className="h-60 w-full rounded object-cover transition-transform duration-200 ease-in-out group-hover:scale-105"
+                  src={urlFor(post.mainImage).url()!}
+                />
+                <div className="flex justify-between bg-white py-3">
+                  <div>
+                    <p className="text-sm">{post.category.title}</p>
+                    <p className="text-lg font-bold">{post.title}</p>
+                    <p className="text-xs">{post.description}</p>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      <Footer />
     </div>
   )
 }
 
 export default Home
+
+export const getStaticProps: GetStaticProps = async () => {
+  const posts = await getPaginatedPost({
+    offset: 0,
+    limit: 3,
+    categoryName: '',
+  })
+  const grammarPosts = await getPaginatedPost({
+    offset: 0,
+    limit: 3,
+    categoryName: 'Grammar',
+  })
+  const vocabularyPosts = await getPaginatedPost({
+    offset: 0,
+    limit: 3,
+    categoryName: 'Vocabulary',
+  })
+  const idiomsPosts = await getPaginatedPost({
+    offset: 0,
+    limit: 3,
+    categoryName: 'IdiomsAndPhrases',
+  })
+  const othersPosts = await getPaginatedPost({
+    offset: 0,
+    limit: 3,
+    categoryName: 'Others',
+  })
+
+  return {
+    props: {
+      posts,
+      grammarPosts,
+      vocabularyPosts,
+      idiomsPosts,
+      othersPosts,
+    },
+    revalidate: 1,
+  }
+}
