@@ -29,8 +29,6 @@ const AllPosts = ({ posts }: Props) => {
     limit: 3,
     categoryName: '',
   })
-  console.log('data=>', data)
-  console.log('posts=>', posts)
   return (
     <div>
       <Header />
@@ -61,7 +59,7 @@ const AllPosts = ({ posts }: Props) => {
             ))
           )}
         </div>
-        {console.log(isEnd)}
+
         {isEnd ? null : (
           <button
             onClick={() => setSize(size + 1)}

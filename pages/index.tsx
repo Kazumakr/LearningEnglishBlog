@@ -24,8 +24,6 @@ const Home = ({
   vocabularyPosts,
   othersPosts,
 }: Props) => {
-  console.log(posts)
-  console.log('grammar', grammarPosts)
   return (
     <div className="">
       <Head>
