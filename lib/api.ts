@@ -88,8 +88,7 @@ export async function getPostBySlug(slug: string) {
     },
     'comments':*[
     _type=="comment"&&
-    post._ref==^._id &&
-    approved==true
+    post._ref==^._id
     ],
     description,
     mainImage,
@@ -98,4 +97,24 @@ export async function getPostBySlug(slug: string) {
   }`
   const result = await currentClient.fetch(query, { slug })
   return result
+}
+
+export async function getAllPostsForSearch() {
+  const query = `*[_type=="post"]|order(publishedAt desc){
+        _id,
+        title,
+        author->{
+          name,
+          image
+        },
+        category->{
+          title,
+        },
+        description,
+        mainImage,
+        slug
+      }`
+
+  const results = await client.fetch(query)
+  return results
 }

@@ -4,14 +4,15 @@ import { GetStaticProps } from 'next'
 import { urlFor } from '../../sanity'
 import Link from 'next/link'
 import { Post } from '../../typings'
-import { getPaginatedPost } from '../../lib/api'
+import { getAllPostsForSearch, getPaginatedPost } from '../../lib/api'
 import { useGetPostsPage } from '../../actions/pagination'
 
 interface Props {
   posts: [Post]
+  allPosts: [Post]
 }
 
-const AllPosts = ({ posts }: Props) => {
+const AllPosts = ({ posts, allPosts }: Props) => {
   const switchCategory = (categoryName: string) => {
     switch (categoryName) {
       case 'Vocabulary':
@@ -26,12 +27,12 @@ const AllPosts = ({ posts }: Props) => {
   }
   const { data, size, setSize, isEnd } = useGetPostsPage({
     posts,
-    limit: 3,
+    limit: 6,
     categoryName: '',
   })
   return (
     <div>
-      <Header />
+      <Header posts={allPosts} />
 
       <div className="mx-auto mt-10 flex max-w-7xl flex-col ">
         <div className="flex items-center justify-between">
@@ -79,12 +80,15 @@ export default AllPosts
 export const getStaticProps: GetStaticProps = async () => {
   const posts = await getPaginatedPost({
     offset: 0,
-    limit: 3,
+    limit: 6,
     categoryName: '',
   })
+
+  const allPosts = await getAllPostsForSearch()
   return {
     props: {
       posts,
+      allPosts,
     },
   }
 }

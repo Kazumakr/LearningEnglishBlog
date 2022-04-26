@@ -7,7 +7,7 @@ import { Post } from '../typings'
 import Link from 'next/link'
 import Footer from '../components/Footer'
 
-import { getPaginatedPost } from '../lib/api'
+import { getPaginatedPost, getAllPostsForSearch } from '../lib/api'
 
 interface Props {
   posts: [Post]
@@ -15,6 +15,7 @@ interface Props {
   idiomsPosts: [Post]
   vocabularyPosts: [Post]
   othersPosts: [Post]
+  allPosts: [Post]
 }
 
 const Home = ({
@@ -23,7 +24,9 @@ const Home = ({
   idiomsPosts,
   vocabularyPosts,
   othersPosts,
+  allPosts,
 }: Props) => {
+  console.log('all', allPosts)
   return (
     <div className="">
       <Head>
@@ -31,13 +34,15 @@ const Home = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
+      <Header posts={allPosts} />
       <Hero />
       <div className="mx-auto mt-10 max-w-7xl">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold">Most Recent Posts</h2>
           <Link href="/posts">
-            <p className="cursor-pointer">View More</p>
+            <p className="cursor-pointer opacity-70 hover:opacity-100">
+              View More
+            </p>
           </Link>
         </div>
         <hr className="my-5 mx-auto w-full border border-gray-300" />
@@ -87,7 +92,9 @@ const Home = ({
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold">Vocabulary</h2>
           <Link href="/posts/vocabulary">
-            <p className="cursor-pointer">View More</p>
+            <p className="cursor-pointer opacity-70 hover:opacity-100">
+              View More
+            </p>
           </Link>
         </div>
         <hr className="my-5 mx-auto w-full border border-gray-300" />
@@ -115,7 +122,9 @@ const Home = ({
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold">Grammar</h2>
           <Link href="/posts/grammar">
-            <p className="cursor-pointer">View More</p>
+            <p className="cursor-pointer opacity-70 hover:opacity-100">
+              View More
+            </p>
           </Link>
         </div>
         <hr className="my-5 mx-auto w-full border border-gray-300" />
@@ -143,7 +152,9 @@ const Home = ({
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold">Idioms&Phrases</h2>
           <Link href="posts/idiomsphrases">
-            <p className="cursor-pointer">View More</p>
+            <p className="cursor-pointer opacity-70 hover:opacity-100">
+              View More
+            </p>
           </Link>
         </div>
         <hr className="my-5 mx-auto w-full border border-gray-300" />
@@ -171,7 +182,9 @@ const Home = ({
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold">Others</h2>
           <Link href="/posts/others">
-            <p className="cursor-pointer">View More</p>
+            <p className="cursor-pointer opacity-70 hover:opacity-100">
+              View More
+            </p>
           </Link>
         </div>
         <hr className="my-5 mx-auto w-full border border-gray-300" />
@@ -230,6 +243,8 @@ export const getStaticProps: GetStaticProps = async () => {
     categoryName: 'Others',
   })
 
+  const allPosts = await getAllPostsForSearch()
+
   return {
     props: {
       posts,
@@ -237,6 +252,7 @@ export const getStaticProps: GetStaticProps = async () => {
       vocabularyPosts,
       idiomsPosts,
       othersPosts,
+      allPosts,
     },
     revalidate: 1,
   }

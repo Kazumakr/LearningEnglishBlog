@@ -2,12 +2,10 @@ import Header from '../../components/Header'
 import { urlFor } from '../../sanity'
 import { Post } from '../../typings'
 import { GetStaticProps } from 'next'
-// import PortableText from 'react-portable-text'
 import BlockContent from '@sanity/block-content-to-react'
-// import { PortableText } from '@portabletext/react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useState } from 'react'
-import { getAllPost, getPostBySlug } from '../../lib/api'
+import { getAllPost, getAllPostsForSearch, getPostBySlug } from '../../lib/api'
 
 interface IFormInput {
   _id: string
@@ -18,8 +16,9 @@ interface IFormInput {
 
 interface Props {
   post: Post
+  allPosts: [Post]
 }
-const Post = ({ post }: Props) => {
+const Post = ({ post, allPosts }: Props) => {
   const [submitted, setSubmitted] = useState<boolean>(false)
   const {
     register,
@@ -56,7 +55,7 @@ const Post = ({ post }: Props) => {
 
   return (
     <main>
-      <Header />
+      <Header posts={allPosts} />
 
       <article className="mx-auto max-w-3xl p-5">
         <div className="mt-10 mb-1 flex justify-between">
@@ -101,27 +100,6 @@ const Post = ({ post }: Props) => {
               },
             }}
           />
-          {/* <PortableText
-            // dataset={process.env.NEXT_PUBLIC_SANITY_DATASET!}
-            // projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}
-            value={post?.body}
-            serializers={{
-              h1: (props: any) => (
-                <h1 className="my-5 text-2xl font-bold" {...props}></h1>
-              ),
-              h2: (props: any) => (
-                <h2 className="my-5 text-xl font-bold" {...props}></h2>
-              ),
-              li: ({ children }: any) => (
-                <li className="ml-4 list-disc">{children}</li>
-              ),
-              link: ({ href, children }: any) => (
-                <a href={href} className="text-blue-500 hover:underline">
-                  {children}
-                </a>
-              ),
-            }}
-          /> */}
         </div>
       </article>
 
@@ -222,8 +200,10 @@ export default Post
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const post = await getPostBySlug(params?.slug as string)
+  const allPosts = await getAllPostsForSearch()
+
   return {
-    props: { post },
+    props: { post, allPosts },
     revalidate: 1,
   }
 }

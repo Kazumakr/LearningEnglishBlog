@@ -6,14 +6,15 @@ import { urlFor } from '../../sanity'
 import Link from 'next/link'
 import { Post } from '../../typings'
 import IdiomsHero from '../../components/IdiomsHero'
-import { getPaginatedPost } from '../../lib/api'
+import { getAllPostsForSearch, getPaginatedPost } from '../../lib/api'
 import { useGetPostsPage } from '../../actions/pagination'
 
 interface Props {
   posts: [Post]
+  allPosts: [Post]
 }
 
-const idiomsphrases = ({ posts }: Props) => {
+const idiomsphrases = ({ posts, allPosts }: Props) => {
   const { data, size, setSize, isEnd } = useGetPostsPage({
     posts,
     limit: 3,
@@ -21,7 +22,7 @@ const idiomsphrases = ({ posts }: Props) => {
   })
   return (
     <div>
-      <Header />
+      <Header posts={allPosts} />
       <IdiomsHero />
       <div className="mx-auto mt-10 flex max-w-7xl flex-col ">
         <div className="flex items-center justify-between">
@@ -71,9 +72,13 @@ export const getStaticProps: GetStaticProps = async () => {
     limit: 3,
     categoryName: 'IdiomsAndPhrases',
   })
+
+  const allPosts = await getAllPostsForSearch()
+
   return {
     props: {
       posts,
+      allPosts,
     },
   }
 }
