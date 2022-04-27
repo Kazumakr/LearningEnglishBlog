@@ -36,11 +36,11 @@ const Home = ({
 
       <Header posts={allPosts} />
       <Hero />
-      <div className="mx-auto mt-10 max-w-7xl">
-        <div className="flex items-center justify-between">
+      <div className="mx-auto mt-10 w-11/12 max-w-7xl">
+        <div className="flex  items-center justify-between">
           <h2 className="text-2xl font-bold">Most Recent Posts</h2>
           <Link href="/posts">
-            <p className="cursor-pointer opacity-70 hover:opacity-100">
+            <p className="hidden cursor-pointer opacity-70 hover:opacity-100 md:inline-block">
               View More
             </p>
           </Link>
@@ -87,12 +87,17 @@ const Home = ({
             })}
           </div>
         </div>
+        <Link href="/posts">
+          <p className="float-right mr-3 cursor-pointer opacity-70 hover:opacity-100 md:hidden">
+            View More
+          </p>
+        </Link>
       </div>
-      <div className="mx-auto mt-10 max-w-7xl">
+      <div className="mx-auto mt-10 w-11/12 max-w-7xl">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold">Vocabulary</h2>
           <Link href="/posts/vocabulary">
-            <p className="cursor-pointer opacity-70 hover:opacity-100">
+            <p className="hidden cursor-pointer opacity-70 hover:opacity-100 md:inline-block">
               View More
             </p>
           </Link>
@@ -117,12 +122,17 @@ const Home = ({
             </Link>
           ))}
         </div>
+        <Link href="/posts/vocabulary">
+          <p className="float-right mr-3 cursor-pointer opacity-70 hover:opacity-100 md:hidden">
+            View More
+          </p>
+        </Link>
       </div>
-      <div className="mx-auto mt-10 max-w-7xl">
+      <div className="mx-auto mt-10 w-11/12 max-w-7xl">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold">Grammar</h2>
           <Link href="/posts/grammar">
-            <p className="cursor-pointer opacity-70 hover:opacity-100">
+            <p className="md:inline-blockcursor-pointer hidden opacity-70 hover:opacity-100">
               View More
             </p>
           </Link>
@@ -147,12 +157,17 @@ const Home = ({
             </Link>
           ))}
         </div>
+        <Link href="/posts/grammar">
+          <p className="float-right mr-3 cursor-pointer opacity-70 hover:opacity-100 md:hidden">
+            View More
+          </p>
+        </Link>
       </div>
-      <div className="mx-auto mt-10 max-w-7xl">
+      <div className="mx-auto mt-10 w-11/12 max-w-7xl">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold">Idioms&Phrases</h2>
           <Link href="posts/idiomsphrases">
-            <p className="cursor-pointer opacity-70 hover:opacity-100">
+            <p className="hidden cursor-pointer opacity-70 hover:opacity-100 md:inline-block">
               View More
             </p>
           </Link>
@@ -177,12 +192,17 @@ const Home = ({
             </Link>
           ))}
         </div>
+        <Link href="posts/idiomsphrases">
+          <p className="float-right mr-3 cursor-pointer opacity-70 hover:opacity-100 md:hidden">
+            View More
+          </p>
+        </Link>
       </div>
-      <div className="mx-auto mt-10 max-w-7xl">
+      <div className="mx-auto mt-10 w-11/12  max-w-7xl">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold">Others</h2>
           <Link href="/posts/others">
-            <p className="cursor-pointer opacity-70 hover:opacity-100">
+            <p className="hidden cursor-pointer opacity-70 hover:opacity-100 md:inline-block">
               View More
             </p>
           </Link>
@@ -207,6 +227,11 @@ const Home = ({
             </Link>
           ))}
         </div>
+        <Link href="/posts/others">
+          <p className="float-right mr-3 cursor-pointer opacity-70 hover:opacity-100 md:hidden">
+            View More
+          </p>
+        </Link>
       </div>
 
       <Footer />
@@ -254,6 +279,6 @@ export const getStaticProps: GetStaticProps = async () => {
       othersPosts,
       allPosts,
     },
-    revalidate: 1,
+    revalidate: 60,
   }
 }

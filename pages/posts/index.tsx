@@ -34,7 +34,7 @@ const AllPosts = ({ posts, allPosts }: Props) => {
     <div>
       <Header posts={allPosts} />
 
-      <div className="mx-auto mt-10 flex max-w-7xl flex-col ">
+      <div className="mx-auto mt-10 flex w-11/12 max-w-7xl flex-col ">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold">All Posts</h2>
         </div>
