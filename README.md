@@ -2,6 +2,8 @@
 
 This is a personal blog for learning English
 
+![BlogScreenShot](https://user-images.githubusercontent.com/67501734/165659682-8f964dff-b8cb-4f5e-a3ee-1dc352f29dec.png)
+
 Project Link: [https://learning-english-blog.vercel.app/]
 
 ## Table of Contents
@@ -76,16 +78,22 @@ I feel more familiar with TypeScript. I was surprised at how easy it is to creat
 ## Usage
 
 ### Add a new post
+![add_post mov](https://user-images.githubusercontent.com/67501734/165664775-6c0168a9-958f-4218-ad75-673bb1914e91.gif)
 
 ### Edit a post
+![edit mov](https://user-images.githubusercontent.com/67501734/165664760-857a0207-7d98-45ad-99dd-d6dffd8ea26a.gif)
 
 ### Delete a post
+![delete_post](https://user-images.githubusercontent.com/67501734/165664882-d29da3ef-0900-4c71-ae20-07eb76b2ec33.gif)
 
 ### Read posts
+![read_post mov](https://user-images.githubusercontent.com/67501734/165664689-959567a2-9117-4672-af74-f3bb60ddaf0c.gif)
 
 ### Search posts by keyword
+![search_post mov](https://user-images.githubusercontent.com/67501734/165664788-b919ed34-b62f-4de6-861e-e99fa466fb6c.gif)
 
 ### Comment
+![comment mov](https://user-images.githubusercontent.com/67501734/165664741-0499859f-948d-4576-95b9-372557b54b60.gif)
 
 ## License
 
