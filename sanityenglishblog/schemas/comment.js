@@ -18,6 +18,7 @@ export default {
     {
       name: 'post',
       type: 'reference',
+      weak: true,
       to: [{ type: 'post' }],
     },
   ],
