@@ -83,9 +83,6 @@ I feel more familiar with TypeScript. I was surprised at how easy it is to creat
 ### Edit a post
 ![edit mov](https://user-images.githubusercontent.com/67501734/165664760-857a0207-7d98-45ad-99dd-d6dffd8ea26a.gif)
 
-### Delete a post
-![delete_post](https://user-images.githubusercontent.com/67501734/165664882-d29da3ef-0900-4c71-ae20-07eb76b2ec33.gif)
-
 ### Read posts
 ![read_post mov](https://user-images.githubusercontent.com/67501734/165664689-959567a2-9117-4672-af74-f3bb60ddaf0c.gif)
 
@@ -94,6 +91,9 @@ I feel more familiar with TypeScript. I was surprised at how easy it is to creat
 
 ### Comment
 ![comment mov](https://user-images.githubusercontent.com/67501734/165664741-0499859f-948d-4576-95b9-372557b54b60.gif)
+
+### Delete a post
+![deletepost](https://user-images.githubusercontent.com/67501734/165665617-b54e5bd1-5ce6-4336-bb1e-d27f222a136d.gif)
 
 ## License
 
