@@ -1,23 +1,111 @@
-# Next.js + Tailwind CSS Example
+# LEB(Learning English Blog)
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+This is a personal blog for learning English
 
-## Deploy your own
+Project Link: [https://learning-english-blog.vercel.app/]
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+## Table of Contents
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+- [Description](#description)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+- [References](#references)
 
-## How to use
+## Description
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+### Why I created this project
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-# or
-pnpm create next-app -- --example with-tailwindcss with-tailwindcss-app
-```
+I created this blog because I wanted a blog to output what I had learned about English.
+I used to have a blog using WordPress, but it was closed down and I wanted to create a new one this time with a different technology.
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+I wanted to use tailwind and TypeScript.
+
+### what I learned through this project
+
+I had built a blog using nextjs and sanity before, so I was familiar with data handling, but I had a lot to learn about using TypeScript and Tailwind.
+I feel more familiar with TypeScript. I was surprised at how easy it is to create responsive designs using Tailwind.
+
+## Built With
+
+- [React.js](https://reactjs.org/)
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Sanity](https://www.sanity.io/)
+
+## Features
+
+- Add a new post
+- Edit a post
+- Delete a post
+- Read posts
+- Search posts by keyword
+- Comment
+
+## Installation
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/Kazumakr/LearningEnglishBlog
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Get sanity project ID and API token (https://www.sanity.io/manage/personal/)
+
+   ```sh
+   NEXT_PUBLIC_SANITY_DATASET=production
+   NEXT_PUBLIC_SANITY_PROJECT_ID=
+   SANITY_API_TOKEN=
+   ```
+
+4. start sanity
+   ```sh
+   cd sanityenglishblog
+   sanity start
+   ```
+5. start nextjs
+   ```sh
+   cd ..
+   npm run dev
+   ```
+
+## Usage
+
+### Add a new post
+
+### Edit a post
+
+### Delete a post
+
+### Read posts
+
+### Search posts by keyword
+
+### Comment
+
+## License
+
+License under the [MIT License](LICENSE)
+
+## References
+
+- [React.js](https://reactjs.org/)
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Sanity](https://www.sanity.io/plugins/react-portable-text)
+- [npm](https://www.npmjs.com/package/react-portable-text)
+- [DEV Community](https://dev.to/)
+- [stackoverflow](https://stackoverflow.com/)
+- [mdn_webDocs](https://developer.mozilla.org/)
+- [w3school](https://www.w3schools.com/)
+- [Flowbite](https://flowbite.com/)
+- [tailwindcomponents](https://tailwindcomponents.com/)
+- [tailwind starter kit](https://www.creative-tim.com/learning-lab/tailwind-starter-kit/presentation)
+- [Tailwind Elements](https://tailwind-elements.com/)
+- [Larainfo](https://larainfo.com/)
+- [KINDACODE](https://www.kindacode.com/)
