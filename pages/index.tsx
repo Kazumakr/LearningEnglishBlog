@@ -26,7 +26,18 @@ const Home = ({
   othersPosts,
   allPosts,
 }: Props) => {
-  console.log('all', allPosts)
+  const switchCategory = (categoryName: string) => {
+    switch (categoryName) {
+      case 'Vocabulary':
+        return <p className="text-sm text-green-500">{categoryName}</p>
+      case 'Grammar':
+        return <p className="text-sm text-red-500">{categoryName}</p>
+      case 'IdiomsAndPhrases':
+        return <p className="text-sm text-blue-500">Idioms&Phrases</p>
+      case 'Others':
+        return <p className="text-sm text-gray-500">{categoryName}</p>
+    }
+  }
   return (
     <div className="">
       <Head>
@@ -56,7 +67,7 @@ const Home = ({
               />
               <div className="flex justify-between bg-white py-3">
                 <div>
-                  <p className="text-sm">{posts[0].category.title}</p>
+                  {switchCategory(posts[0].category.title)}
                   <p className="text-lg font-bold">{posts[0].title}</p>
                   <p className="text-xs">{posts[0].description}</p>
                 </div>
@@ -76,7 +87,7 @@ const Home = ({
                       />
                       <div className="flex justify-between bg-white py-3">
                         <div>
-                          <p className="text-sm">{post.category.title}</p>
+                          {switchCategory(post.category.title)}
                           <p className="text-lg font-bold">{post.title}</p>
                         </div>
                       </div>
@@ -113,7 +124,9 @@ const Home = ({
                 />
                 <div className="flex justify-between bg-white py-3">
                   <div>
-                    <p className="text-sm">{post.category.title}</p>
+                    <p className="text-sm text-green-500">
+                      {post.category.title}
+                    </p>
                     <p className="text-lg font-bold">{post.title}</p>
                     <p className="text-xs">{post.description}</p>
                   </div>
@@ -148,7 +161,9 @@ const Home = ({
                 />
                 <div className="flex justify-between bg-white py-3">
                   <div>
-                    <p className="text-sm">{post.category.title}</p>
+                    <p className="text-sm text-red-500">
+                      {post.category.title}
+                    </p>
                     <p className="text-lg font-bold">{post.title}</p>
                     <p className="text-xs">{post.description}</p>
                   </div>
@@ -183,7 +198,9 @@ const Home = ({
                 />
                 <div className="flex justify-between bg-white py-3">
                   <div>
-                    <p className="text-sm">{post.category.title}</p>
+                    <p className="text-sm text-blue-500">
+                      {post.category.title}
+                    </p>
                     <p className="text-lg font-bold">{post.title}</p>
                     <p className="text-xs">{post.description}</p>
                   </div>
@@ -218,7 +235,9 @@ const Home = ({
                 />
                 <div className="flex justify-between bg-white py-3">
                   <div>
-                    <p className="text-sm">{post.category.title}</p>
+                    <p className="text-sm text-gray-500">
+                      {post.category.title}
+                    </p>
                     <p className="text-lg font-bold">{post.title}</p>
                     <p className="text-xs">{post.description}</p>
                   </div>
